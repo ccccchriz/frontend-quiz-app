@@ -7,7 +7,19 @@
     <title>Frontend Mentor | Frontend quiz app</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" class="dark">
+      <script>
+        // Gets rid of wrong theme flashing
+        const root = document.getElementById("root");
+        const darkMode = localStorage.getItem("darkMode");
+        if (darkMode == "light") root.classList.remove("dark");
+        if (
+          !darkMode &&
+          window.matchMedia("(prefers-color-scheme: light)").matches
+        )
+          root.classList.remove("dark");
+      </script>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
