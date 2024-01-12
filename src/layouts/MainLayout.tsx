@@ -36,7 +36,7 @@ export default function MainLayout({ children, title }: MainLayoutProps) {
 
   return (
     <>
-      <main className="min-h-dvh font-primary text-neutral-600 dark:text-neutral-100 bg-neutral-200 dark:bg-neutral-500 transition-colors duration-300">
+      <main className="min-h-dvh flex flex-col font-primary text-neutral-600 dark:text-neutral-100 bg-neutral-200 dark:bg-neutral-500 transition-colors duration-300">
         <h1 className="sr-only">Quiz</h1>
         <header className="flex justify-between px-6 py-4">
           {title ? (
@@ -58,7 +58,7 @@ export default function MainLayout({ children, title }: MainLayoutProps) {
             ></input>
           </div>
         </header>
-        {children}
+        <div className="grow">{children}</div>
       </main>
     </>
   );
