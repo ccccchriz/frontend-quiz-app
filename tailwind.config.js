@@ -22,6 +22,14 @@ export default {
       medium: 500,
       bold: 700,
     },
+    fontSize: {
+      "body-s": ["1.25rem", 1.5],
+      "body-m": ["1.5rem", 1.5],
+      "heading-s": ["1.75rem", 1],
+      "heading-m": ["2.25rem", 1.2],
+      "heading-l": ["4rem", 1],
+      display: ["9rem", 1],
+    },
     screens: {
       tablet: "48rem",
       desktop: "64rem",
