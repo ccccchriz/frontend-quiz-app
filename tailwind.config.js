@@ -40,7 +40,11 @@ export default {
       tablet: "48rem",
       desktop: "64rem",
     },
-    extend: {},
+    extend: {
+      transitionProperty: {
+        bg: "background-color",
+      },
+    },
   },
   plugins: [],
 };
