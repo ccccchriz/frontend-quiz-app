@@ -3,8 +3,8 @@ import { useState } from "react";
 interface MainLayoutProps {
   children: React.ReactNode;
   title?: {
-    image: string;
-    name: string;
+    icon?: string;
+    title?: string;
   };
 }
 
@@ -41,9 +41,9 @@ export default function MainLayout({ children, title }: MainLayoutProps) {
         <header className="flex justify-between px-6 py-4">
           {title ? (
             <div className="flex items-center gap-4">
-              <img src={title.image} className="size-10" />
+              <img src={title.icon} className="size-10" />
               <h2 className="text-mb-1.125 tablet:text-body-s  font-medium">
-                {title.name}
+                {title.title}
               </h2>
             </div>
           ) : (
