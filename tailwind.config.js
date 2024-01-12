@@ -29,6 +29,12 @@ export default {
       "heading-m": ["2.25rem", 1.2],
       "heading-l": ["4rem", 1],
       display: ["9rem", 1],
+
+      "mb-0.875": ["0.875rem", 1],
+      "mb-1.125": ["1.125rem", 1],
+      "mb-1.25": ["1.25rem", 1],
+      "mb-2.5": ["2.5rem", 1],
+      "mb-5.5": ["5.5rem", 1],
     },
     screens: {
       tablet: "48rem",
