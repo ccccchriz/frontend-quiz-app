@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MainLayout from "./layouts/MainLayout";
 import Start from "./pages/Start";
+import Question from "./pages/Question";
 
 interface importData {
   quizzes: {
@@ -51,7 +52,7 @@ function App() {
       <MainLayout
         title={{ title: data?.quizzes[id].title, icon: data?.quizzes[id].icon }}
       >
-        <div className=""></div>
+        <Question data={data!.quizzes[id].questions} />
       </MainLayout>
     );
 }
