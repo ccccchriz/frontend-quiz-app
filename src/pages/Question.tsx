@@ -13,6 +13,7 @@ export default function Question({ data }: QuestionProps) {
   const firstInput = useRef<HTMLInputElement>(null);
   const form = useRef<HTMLFormElement>(null);
   const nextQuestion = useRef<HTMLButtonElement>(null);
+  const liveArea = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (firstInput.current) {
@@ -22,31 +23,40 @@ export default function Question({ data }: QuestionProps) {
   }, [currentQuestion]);
 
   const handleSubmit = (e: FormEvent) => {
+    liveArea.current!.innerText = "";
     e.preventDefault();
     const inputs = form.current!.querySelectorAll("input");
-    form.current!.setAttribute("aria-hidden", "true");
     form.current!.querySelector("button")?.classList.add("hidden");
     (form.current!.querySelector("button") as HTMLButtonElement).disabled =
       true;
     nextQuestion.current?.classList.remove("hidden");
     nextQuestion.current?.focus();
     inputs.forEach((el, index) => {
+      const isCurrentCorrect =
+        index ==
+        data![currentQuestion].options.indexOf(data![currentQuestion].answer);
       if (el.checked) {
-        if (
-          index ==
-          data![currentQuestion].options.indexOf(data![currentQuestion].answer)
-        ) {
+        if (isCurrentCorrect) {
           el.parentElement!.classList.add("right-answer");
+          liveArea.current!.innerText = "You selected the correct answer";
         } else {
           el.parentElement!.classList.add("wrong-answer");
+          liveArea.current!.innerText = `You selected the wrong answer. The correct answer is ${
+            data![currentQuestion].answer
+          }`;
         }
-      } else if (
-        index ==
-        data![currentQuestion].options.indexOf(data![currentQuestion].answer)
-      ) {
       }
-      el.disabled = true;
-      el.checked = false;
+      if (isCurrentCorrect) {
+        el.setAttribute(
+          "aria-label",
+          `right answer, ${data![currentQuestion].options[index]}`
+        );
+      } else {
+        el.setAttribute(
+          "aria-label",
+          `wrong answer, ${data![currentQuestion].options[index]}`
+        );
+      }
     });
   };
 
@@ -55,9 +65,8 @@ export default function Question({ data }: QuestionProps) {
     inputs.forEach((el) => {
       el.parentElement!.classList.remove("right-answer");
       el.parentElement!.classList.remove("wrong-answer");
-      el.disabled = false;
+      el.removeAttribute("aria-label");
     });
-    form.current!.removeAttribute("aria-hidden");
     form.current!.querySelector("button")?.classList.remove("hidden");
     (form.current!.querySelector("button") as HTMLButtonElement).disabled =
       false;
@@ -72,7 +81,7 @@ export default function Question({ data }: QuestionProps) {
       </h3>
       <form action="" className="grid gap-3" ref={form} onSubmit={handleSubmit}>
         <fieldset className="grid gap-3">
-          <legend className="text-mb-1.25 font-medium">
+          <legend className="text-mb-1.25 font-medium" aria-live="polite">
             {data![currentQuestion].question}
           </legend>
           <progress
@@ -88,27 +97,18 @@ export default function Question({ data }: QuestionProps) {
               className="group bg-neutral-100 dark:bg-neutral-500 flex items-center gap-2 p-3 rounded-[0.75rem] text-mb-1.125 font-medium border-4 border-neutral-100 dark:border-neutral-500 active:border-4 has-[:checked]:!border-accent-purple cursor-pointer"
             >
               <div
-                className="shrink-0 grid place-items-center size-10 bg-neutral-200 rounded-[0.5rem] group-aria-hidden:group-hover:text-accent-purple  group-hover:bg-accent-purple group-hover:bg-opacity-10 transition-all group-has-[:checked]:bg-accent-purple group-has-[:checked]:text-neutral-100 dark:text-neutral-400"
+                className="shrink-0 grid place-items-center size-10 bg-neutral-200 rounded-[0.5rem] group-hover:text-accent-purple  group-hover:bg-accent-purple group-hover:bg-opacity-10 transition-all group-has-[:checked]:bg-accent-purple group-has-[:checked]:text-neutral-100 dark:text-neutral-400"
                 aria-hidden={true}
               >
                 {String.fromCharCode(65 + index)}
               </div>
-              {index == 0 ? (
-                <input
-                  ref={firstInput}
-                  type="radio"
-                  id={`${index}`}
-                  name="answer"
-                  className="appearance-none"
-                ></input>
-              ) : (
-                <input
-                  type="radio"
-                  id={`${index}`}
-                  name="answer"
-                  className="appearance-none"
-                ></input>
-              )}
+              <input
+                ref={index == 0 ? firstInput : null}
+                type="radio"
+                id={`${index}`}
+                name="answer"
+                className="appearance-none"
+              ></input>
               {el}
             </label>
           ))}
@@ -120,6 +120,7 @@ export default function Question({ data }: QuestionProps) {
           Submit Answer
         </button>
       </form>
+      <div className="sr-only" aria-live="assertive" ref={liveArea}></div>
       <button
         ref={nextQuestion}
         onClick={handleNextQuestion}
