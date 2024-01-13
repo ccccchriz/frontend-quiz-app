@@ -29,3 +29,25 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@layer components {
+  .wrong-answer {
+    border: 4px solid theme("colors.error-red") !important;
+    cursor: auto !important;
+  }
+
+  .wrong-answer > div {
+    background-color: theme("colors.error-red") !important;
+    color: theme("colors.neutral-100") !important;
+  }
+
+  .right-answer {
+    border: 4px solid theme("colors.correct-green") !important;
+    cursor: auto !important;
+  }
+
+  .right-answer > div {
+    background-color: theme("colors.correct-green") !important;
+    color: theme("colors.neutral-100") !important;
+  }
+}
