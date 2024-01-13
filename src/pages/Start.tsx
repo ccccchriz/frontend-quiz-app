@@ -14,15 +14,15 @@ export default function Start({ setId, data }: StartProps) {
       <h2 className="text-mb-2.5 tablet:text-heading-l">
         Welcome to the <strong>Frontend Quiz!</strong>
       </h2>
-      <p className="text-mb-0.875 tablet:text-body-s from-neutral-200 mb-6">
-        Pick a subject to get started.
-      </p>
-      <div className="grid gap-3">
+      <fieldset className="grid gap-3">
+        <legend className="text-mb-0.875 tablet:text-body-s from-neutral-200 mb-6">
+          Pick a subject to get started.
+        </legend>
         {data &&
           data.map((el, index) => (
             <TopicButton data={el} setId={() => setId(index)} key={index} />
           ))}
-      </div>
+      </fieldset>
     </div>
   );
 }
