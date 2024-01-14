@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Result from "./Result";
 
 interface QuestionProps {
   data?: {
@@ -6,10 +7,16 @@ interface QuestionProps {
     options: string[];
     answer: string;
   }[];
+  setId: Function;
+  title: {
+    title: string;
+    icon: string;
+  };
 }
 
-export default function Question({ data }: QuestionProps) {
+export default function Question({ data, setId, title }: QuestionProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
   const firstInput = useRef<HTMLInputElement>(null);
   const form = useRef<HTMLFormElement>(null);
   const nextQuestion = useRef<HTMLButtonElement>(null);
@@ -22,8 +29,7 @@ export default function Question({ data }: QuestionProps) {
     }
   }, [currentQuestion]);
 
-  const handleSubmit = (e: FormEvent) => {
-    liveArea.current!.innerText = "";
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const inputs = form.current!.querySelectorAll("input");
     form.current!.querySelector("button")?.classList.add("hidden");
@@ -32,19 +38,24 @@ export default function Question({ data }: QuestionProps) {
     nextQuestion.current?.classList.remove("hidden");
     nextQuestion.current?.focus();
     inputs.forEach((el, index) => {
+      el.parentElement!.querySelector("div")!.classList.remove("active-radio");
       const isCurrentCorrect =
         index ==
         data![currentQuestion].options.indexOf(data![currentQuestion].answer);
       if (el.checked) {
         if (isCurrentCorrect) {
-          el.parentElement!.classList.add("right-answer");
+          el.parentElement!.classList.add("right-answer", "correct-answer");
+          el.parentElement!.classList.add();
           liveArea.current!.innerText = "You selected the correct answer";
+          setScore((value) => value + 1);
         } else {
           el.parentElement!.classList.add("wrong-answer");
           liveArea.current!.innerText = `You selected the wrong answer. The correct answer is ${
             data![currentQuestion].answer
           }`;
         }
+      } else if (isCurrentCorrect && !el.checked) {
+        el.parentElement!.classList.add("correct-answer");
       }
       if (isCurrentCorrect) {
         el.setAttribute(
@@ -62,9 +73,14 @@ export default function Question({ data }: QuestionProps) {
 
   const handleNextQuestion = () => {
     const inputs = form.current!.querySelectorAll("input");
+    liveArea.current!.innerText = "";
     inputs.forEach((el) => {
-      el.parentElement!.classList.remove("right-answer");
-      el.parentElement!.classList.remove("wrong-answer");
+      el.parentElement!.classList.remove(
+        "right-answer",
+        "correct-answer",
+        "wrong-answer"
+      );
+      el.parentElement!.querySelector("div")!.classList.add("active-radio");
       el.removeAttribute("aria-label");
     });
     form.current!.querySelector("button")?.classList.remove("hidden");
@@ -73,6 +89,10 @@ export default function Question({ data }: QuestionProps) {
     nextQuestion.current?.classList.add("hidden");
     setCurrentQuestion((value) => value + 1);
   };
+
+  if (currentQuestion == data?.length) {
+    return <Result score={score} setId={setId} title={title} />;
+  }
 
   return (
     <div className="grid px-6 py-8 gap-4">
@@ -94,10 +114,10 @@ export default function Question({ data }: QuestionProps) {
             <label
               key={index}
               htmlFor={`${index}`}
-              className="group bg-neutral-100 dark:bg-neutral-500 flex items-center gap-2 p-3 rounded-[0.75rem] text-mb-1.125 font-medium border-4 border-neutral-100 dark:border-neutral-500 active:border-4 has-[:checked]:!border-accent-purple cursor-pointer"
+              className="group bg-neutral-100 dark:bg-neutral-500 flex items-center gap-2 p-3 rounded-xl text-mb-1.125 font-medium border-4 border-neutral-100 dark:border-neutral-500 active:border-4 has-[:checked]:border-accent-purple [&:has(div.active-radio)]:cursor-pointer"
             >
               <div
-                className="shrink-0 grid place-items-center size-10 bg-neutral-200 rounded-[0.5rem] group-hover:text-accent-purple  group-hover:bg-accent-purple group-hover:bg-opacity-10 transition-all group-has-[:checked]:bg-accent-purple group-has-[:checked]:text-neutral-100 dark:text-neutral-400"
+                className="shrink-0 grid place-items-center size-10 bg-neutral-200 rounded-[0.5rem] active-radio transition-all  dark:text-neutral-400"
                 aria-hidden={true}
               >
                 {String.fromCharCode(65 + index)}
@@ -115,7 +135,7 @@ export default function Question({ data }: QuestionProps) {
         </fieldset>
         <button
           type="submit"
-          className="bg-accent-purple text-neutral-100 text-mb-1.125 font-medium p-6 rounded-[0.75rem]"
+          className="bg-accent-purple text-neutral-100 text-mb-1.125 font-medium p-6 rounded-xl"
         >
           Submit Answer
         </button>
@@ -125,7 +145,7 @@ export default function Question({ data }: QuestionProps) {
         ref={nextQuestion}
         onClick={handleNextQuestion}
         type="button"
-        className="bg-accent-purple text-neutral-100 text-mb-1.125 font-medium p-6 rounded-[0.75rem] hidden -mt-1"
+        className="bg-accent-purple text-neutral-100 text-mb-1.125 font-medium p-6 rounded-xl hidden -mt-1"
       >
         Next Question
       </button>
