@@ -31,6 +31,10 @@
 }
 
 @layer components {
+  .active-radio {
+    @apply group-hover:text-accent-purple group-hover:bg-accent-purple group-hover:bg-opacity-10 group-has-[:checked]:bg-accent-purple group-has-[:checked]:text-neutral-100;
+  }
+
   .wrong-answer {
     border: 4px solid theme("colors.error-red") !important;
     cursor: auto !important;
@@ -41,6 +45,17 @@
     color: theme("colors.neutral-100") !important;
   }
 
+  .wrong-answer::after {
+    flex-shrink: 0;
+    content: "";
+    background-image: url("/images/icon-incorrect.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-left: auto;
+  }
+
   .right-answer {
     border: 4px solid theme("colors.correct-green") !important;
     cursor: auto !important;
@@ -49,5 +64,16 @@
   .right-answer > div {
     background-color: theme("colors.correct-green") !important;
     color: theme("colors.neutral-100") !important;
+  }
+
+  .correct-answer::after {
+    flex-shrink: 0;
+    content: "";
+    background-image: url("/images/icon-correct.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-left: auto;
   }
 }
