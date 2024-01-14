@@ -38,11 +38,11 @@ export default function MainLayout({ children, title }: MainLayoutProps) {
     <>
       <main className="min-h-dvh flex flex-col font-primary text-neutral-600 dark:text-neutral-100 bg-neutral-200 dark:bg-neutral-600 transition-bg duration-300">
         <h1 className="sr-only">Quiz</h1>
-        <header className="flex justify-between px-6 py-4">
+        <header className="flex justify-between px-6 py-4 tablet:px-16 tablet:py-12">
           {title ? (
             <div className="flex items-center gap-4">
-              <img src={title.icon} alt="" className="size-10" />
-              <h2 className="text-mb-1.125 tablet:text-body-s  font-medium">
+              <img src={title.icon} alt="" className="size-10 tablet:size-14" />
+              <h2 className="text-mb-1.125 tablet:text-heading-s font-medium">
                 {title.title}
               </h2>
             </div>

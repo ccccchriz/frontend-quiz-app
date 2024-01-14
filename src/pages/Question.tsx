@@ -95,13 +95,21 @@ export default function Question({ data, setId, title }: QuestionProps) {
   }
 
   return (
-    <div className="grid px-6 py-8 gap-4">
-      <h3 className=" text-neutral-400 text-mb-0.875 italic">
+    <div className="grid px-6 py-8 gap-4 tablet:gap-8 tablet:pt-0 tablet:px-16">
+      <h3 className=" text-neutral-400 text-mb-0.875 tablet:text-body-s italic">
         Question {currentQuestion + 1} out of {data!.length}
       </h3>
-      <form action="" className="grid gap-3" ref={form} onSubmit={handleSubmit}>
-        <fieldset className="grid gap-3">
-          <legend className="text-mb-1.25 font-medium" aria-live="polite">
+      <form
+        action=""
+        className="grid gap-3 tablet:gap-8"
+        ref={form}
+        onSubmit={handleSubmit}
+      >
+        <fieldset className="grid gap-4 tablet:gap-6">
+          <legend
+            className="text-mb-1.25 tablet:text-heading-m font-medium"
+            aria-live="polite"
+          >
             {data![currentQuestion].question}
           </legend>
           <progress
@@ -114,10 +122,10 @@ export default function Question({ data, setId, title }: QuestionProps) {
             <label
               key={index}
               htmlFor={`${index}`}
-              className="group bg-neutral-100 dark:bg-neutral-500 flex items-center gap-2 p-3 rounded-xl text-mb-1.125 font-medium border-4 border-neutral-100 dark:border-neutral-500 active:border-4 has-[:checked]:border-accent-purple [&:has(div.active-radio)]:cursor-pointer"
+              className="group bg-neutral-100 dark:bg-neutral-500 flex items-center gap-2 tablet:gap-8 p-3 rounded-xl text-mb-1.125 tablet:text-heading-s font-medium border-4 border-neutral-100 dark:border-neutral-500 active:border-4 has-[:checked]:border-accent-purple [&:has(div.active-radio)]:cursor-pointer"
             >
               <div
-                className="shrink-0 grid place-items-center size-10 bg-neutral-200 rounded-[0.5rem] active-radio transition-all  dark:text-neutral-400"
+                className="shrink-0 grid place-items-center size-10 tablet:size-14 bg-neutral-200 rounded-lg active-radio transition-all  dark:text-neutral-400"
                 aria-hidden={true}
               >
                 {String.fromCharCode(65 + index)}
@@ -135,7 +143,7 @@ export default function Question({ data, setId, title }: QuestionProps) {
         </fieldset>
         <button
           type="submit"
-          className="bg-accent-purple text-neutral-100 text-mb-1.125 font-medium p-6 rounded-xl"
+          className="bg-accent-purple text-neutral-100 text-mb-1.125 tablet:text-heading-s font-medium p-6 tablet:p-8 rounded-xl"
         >
           Submit Answer
         </button>
@@ -145,7 +153,7 @@ export default function Question({ data, setId, title }: QuestionProps) {
         ref={nextQuestion}
         onClick={handleNextQuestion}
         type="button"
-        className="bg-accent-purple text-neutral-100 text-mb-1.125 font-medium p-6 rounded-xl hidden -mt-1"
+        className="bg-accent-purple text-neutral-100 text-mb-1.125 tablet:text-heading-s font-medium p-6 tablet:p-8 rounded-xl hidden "
       >
         Next Question
       </button>
