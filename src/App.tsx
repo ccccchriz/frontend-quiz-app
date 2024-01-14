@@ -52,7 +52,14 @@ function App() {
       <MainLayout
         title={{ title: data?.quizzes[id].title, icon: data?.quizzes[id].icon }}
       >
-        <Question data={data!.quizzes[id].questions} />
+        <Question
+          title={{
+            title: data?.quizzes[id].title,
+            icon: data?.quizzes[id].icon,
+          }}
+          data={data!.quizzes[id].questions}
+          setId={setId}
+        />
       </MainLayout>
     );
 }
