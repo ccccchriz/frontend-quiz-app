@@ -122,7 +122,7 @@ export default function Question({ data, setId, title }: QuestionProps) {
             <label
               key={index}
               htmlFor={`${index}`}
-              className="group bg-neutral-100 dark:bg-neutral-500 flex items-center gap-2 tablet:gap-8 p-3 rounded-xl text-mb-1.125 tablet:text-heading-s font-medium border-4 border-neutral-100 dark:border-neutral-500 active:border-4 has-[:checked]:border-accent-purple [&:has(div.active-radio)]:cursor-pointer"
+              className="group bg-neutral-100 dark:bg-neutral-500 flex items-center gap-2 tablet:gap-4 p-3 rounded-xl text-mb-1.125 tablet:text-heading-s font-medium border-4 border-neutral-100 dark:border-neutral-500 active:border-4 has-[:checked]:border-accent-purple [&:has(div.active-radio)]:cursor-pointer"
             >
               <div
                 className="shrink-0 grid place-items-center size-10 tablet:size-14 bg-neutral-200 rounded-lg active-radio transition-all  dark:text-neutral-400"
