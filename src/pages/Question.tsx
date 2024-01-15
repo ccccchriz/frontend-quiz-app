@@ -114,7 +114,7 @@ export default function Question({ data, setId, title }: QuestionProps) {
           </legend>
           <progress
             aria-hidden={true}
-            className="desktop:col-[1/2] desktop:row-[4/7] w-full appearance-none bg-neutral-100 rounded-full mt-6 mb-10 p-1 [&::-webkit-progress-value]:bg-accent-purple [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-bar]:bg-neutral-100 [&::-webkit-progress-bar]:rounded-full dark:[&::-webkit-progress-bar]:bg-neutral-500 dark:bg-neutral-500"
+            className="desktop:col-[1/2] desktop:row-[4/5] w-full appearance-none bg-neutral-100 rounded-full mt-6 mb-10 p-1 [&::-webkit-progress-value]:bg-accent-purple [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-bar]:bg-neutral-100 [&::-webkit-progress-bar]:rounded-full dark:[&::-webkit-progress-bar]:bg-neutral-500 dark:bg-neutral-500 desktop:mb-0"
             value={currentQuestion}
             max={data!.length}
           ></progress>
