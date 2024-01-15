@@ -36,9 +36,9 @@ export default function MainLayout({ children, title }: MainLayoutProps) {
 
   return (
     <>
-      <main className="min-h-dvh flex flex-col font-primary text-neutral-600 dark:text-neutral-100 bg-neutral-200 dark:bg-neutral-600 transition-bg duration-300">
+      <main className="min-h-dvh flex flex-col items-center font-primary text-neutral-600 dark:text-neutral-100 bg-neutral-200 dark:bg-neutral-600 transition-bg duration-300">
         <h1 className="sr-only">Quiz</h1>
-        <header className="flex justify-between px-6 py-4 tablet:px-16 tablet:py-12">
+        <header className="flex w-full justify-between px-6 py-4 tablet:px-16 tablet:py-12 desktop:max-w-[72.5rem]">
           {title ? (
             <div className="flex items-center gap-4">
               <img src={title.icon} alt="" className="size-10 tablet:size-14" />

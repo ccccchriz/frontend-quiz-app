@@ -9,7 +9,7 @@ interface ResultProps {
 
 export default function Result({ score, setId, title }: ResultProps) {
   return (
-    <div className="grid place-items-center p-8 gap-3 tablet:gap-8">
+    <div className="grid place-items-center p-8 gap-3 tablet:gap-8 desktop:max-w-[72.5rem]">
       <h3 className="grid text-mb-2.5 tablet:text-heading-l mb-7 w-full">
         Quiz completed <strong className="font-medium">You scored...</strong>
       </h3>

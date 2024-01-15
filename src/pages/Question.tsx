@@ -95,7 +95,7 @@ export default function Question({ data, setId, title }: QuestionProps) {
   }
 
   return (
-    <div className="grid px-6 py-8 gap-4 tablet:gap-8 tablet:pt-0 tablet:px-16">
+    <div className="grid px-6 py-8 gap-4 tablet:gap-8 tablet:pt-0 tablet:px-16 desktop:max-w-[72.5rem]">
       <h3 className=" text-neutral-400 text-mb-0.875 tablet:text-body-s italic">
         Question {currentQuestion + 1} out of {data!.length}
       </h3>
@@ -105,16 +105,16 @@ export default function Question({ data, setId, title }: QuestionProps) {
         ref={form}
         onSubmit={handleSubmit}
       >
-        <fieldset className="grid gap-4 tablet:gap-6">
+        <fieldset className="grid gap-4 tablet:gap-6 desktop:grid-cols-2 ">
           <legend
-            className="text-mb-1.25 tablet:text-heading-m font-medium"
+            className="float-left text-mb-1.25 tablet:text-heading-m font-medium desktop:col-[1/2] desktop:row-[1/4] desktop:mt-"
             aria-live="polite"
           >
             {data![currentQuestion].question}
           </legend>
           <progress
             aria-hidden={true}
-            className="w-full appearance-none bg-neutral-100 rounded-full mt-6 mb-10 p-1 [&::-webkit-progress-value]:bg-accent-purple [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-bar]:bg-neutral-100 [&::-webkit-progress-bar]:rounded-full dark:[&::-webkit-progress-bar]:bg-neutral-500 dark:bg-neutral-500"
+            className="desktop:col-[1/2] desktop:row-[4/7] w-full appearance-none bg-neutral-100 rounded-full mt-6 mb-10 p-1 [&::-webkit-progress-value]:bg-accent-purple [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-bar]:bg-neutral-100 [&::-webkit-progress-bar]:rounded-full dark:[&::-webkit-progress-bar]:bg-neutral-500 dark:bg-neutral-500"
             value={currentQuestion}
             max={data!.length}
           ></progress>

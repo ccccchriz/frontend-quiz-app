@@ -10,7 +10,7 @@ interface StartProps {
 
 export default function Start({ setId, data }: StartProps) {
   return (
-    <div className="grid px-6 tablet:px-16 py-8 gap-4">
+    <div className="grid desktop:grid-cols-2 px-6 tablet:px-16 py-8 gap-4 desktop:max-w-[72.5rem]">
       <h2 className="text-mb-2.5 tablet:text-heading-l">
         Welcome to the <strong>Frontend Quiz!</strong>
       </h2>
